@@ -162,10 +162,16 @@ export const Organization3D: React.FC = () => {
               <div className="flex flex-col items-center [perspective:1000px]">
                 <div className="w-full max-w-xs rounded-2xl border border-sky-400/50 bg-gradient-to-br from-sky-400/15 via-slate-900 to-slate-950 p-3.5 text-center shadow-[0_10px_0_rgba(3,105,161,0.25),0_18px_30px_rgba(0,0,0,0.45)] [transform:rotateX(8deg)]">
                   <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-sky-300">Kaprodi Teknik Pertambangan Batubara</div>
-                  <div className="mt-1.5 text-xs font-bold leading-relaxed text-white sm:text-sm">Bpk. Mirza Adiwarman, S.T., M.T.</div>
+                  <div className="mt-1.5 text-xs font-bold leading-relaxed text-white sm:text-sm">Bapak Mirza Adiwarman, S.T., M.T.</div>
                 </div>
 
-                <div className="h-7 w-px bg-gradient-to-b from-sky-400/70 to-amber-400/70" />
+                <div className="h-5 w-px bg-sky-400/60" />
+                <div className="w-full max-w-xs rounded-xl border border-sky-400/35 bg-slate-900/90 p-3.5 text-center shadow-[0_8px_0_rgba(3,105,161,0.2),0_14px_24px_rgba(0,0,0,0.4)] [transform:rotateX(7deg)]">
+                  <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-sky-200">Sekretaris Prodi</div>
+                  <div className="mt-1 text-xs font-semibold leading-relaxed text-slate-100">Ibuk Ir. Siti Nuryanti, S.T., M.T.</div>
+                </div>
+
+                <div className="h-5 w-px bg-gradient-to-b from-sky-400/60 to-amber-400/70" />
                 <div className="w-full max-w-xs rounded-2xl border border-amber-400/70 bg-gradient-to-br from-amber-300/20 via-slate-900 to-slate-950 p-4 text-center shadow-[0_14px_0_rgba(120,53,15,0.38),0_20px_35px_rgba(0,0,0,0.55)] transition-transform duration-300 [transform:rotateX(8deg)]">
                   <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-amber-400">Ketua Himpunan</div>
                   <div className="mt-1.5 text-sm font-bold text-white">{chair?.name ?? 'Belum ditentukan'}</div>
@@ -264,13 +270,13 @@ export const Organization3D: React.FC = () => {
                     <span className="text-[10px] text-slate-500">NPM & Kelas Resmi</span>
                   </div>
 
-                  <div className="max-h-[220px] overflow-y-auto rounded-xl border border-slate-800 bg-slate-950/70 divide-y divide-slate-800/80 text-xs">
+                  <div className="max-h-[220px] overflow-y-auto rounded-xl border border-slate-800 bg-slate-950/70 divide-y divide-slate-800/80 text-xs sm:max-h-none sm:overflow-visible">
                     {departmentDetails.members.map((m) => (
                       <div key={m.no} className="px-3.5 py-2.5 flex items-center justify-between hover:bg-slate-900/50 transition-colors">
-                        <div className="flex items-center gap-2.5 min-w-0 pr-2">
+                        <div className="flex min-w-0 flex-1 items-center gap-2.5 pr-2">
                           <span className="w-5 text-[10px] text-slate-500 font-mono text-right shrink-0">{m.no}.</span>
-                          <div className="truncate">
-                            <div className="font-semibold text-slate-100 truncate">{m.name}</div>
+                          <div className="min-w-0">
+                            <div className="font-semibold whitespace-normal break-words text-slate-100">{m.name}</div>
                             <div className="text-[10px] text-amber-400/90 font-mono">NPM: {m.npm}</div>
                           </div>
                         </div>
