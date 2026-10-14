@@ -1,0 +1,248 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif, Georgia;
+}
+
+/* Custom 3D perspective and glow utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Custom golden gradient effects */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FFF6D1 0%, #F5C542 50%, #B8860B 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-border {
+  border-image: linear-gradient(135deg, #F5C542, #785A18) 1;
+}
+
+.mining-backdrop {
+  position: fixed;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.82;
+}
+
+.mining-backdrop-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 8% 43%, rgb(180 83 9 / 17%), transparent 29%),
+    radial-gradient(ellipse at 92% 61%, rgb(245 158 11 / 16%), transparent 31%),
+    radial-gradient(ellipse at 5% 77%, rgb(220 38 38 / 13%), transparent 25%),
+    radial-gradient(ellipse at 95% 31%, rgb(185 28 28 / 11%), transparent 23%),
+    linear-gradient(180deg, transparent 55%, rgb(2 6 23 / 28%));
+}
+
+.mining-backdrop-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.mining-coal {
+  position: absolute;
+  display: block;
+  width: var(--coal-size, 17px);
+  height: calc(var(--coal-size, 17px) * 0.78);
+  border: 1px solid rgb(225 177 74 / 66%);
+  border-radius: 39% 61% 30% 70%;
+  background: linear-gradient(140deg, rgb(148 163 184 / 73%), rgb(51 65 85 / 68%) 45%, rgb(15 23 42 / 88%));
+  box-shadow: inset -4px -3px 5px rgb(0 0 0 / 72%), inset 2px 2px 4px rgb(203 213 225 / 28%), 0 0 17px rgb(245 158 11 / 26%);
+  animation: coal-drift var(--coal-duration, 13s) ease-in-out infinite alternate;
+}
+
+.mining-coal-1 { --coal-size: 21px; --coal-duration: 12s; top: 13%; left: 4%; }
+.mining-coal-2 { --coal-size: 14px; --coal-duration: 16s; top: 23%; left: 17%; animation-delay: -7s; }
+.mining-coal-3 { --coal-size: 24px; --coal-duration: 14s; top: 32%; left: 6%; animation-delay: -10s; }
+.mining-coal-4 { --coal-size: 12px; --coal-duration: 11s; top: 43%; left: 20%; animation-delay: -4s; }
+.mining-coal-5 { --coal-size: 18px; --coal-duration: 15s; top: 55%; left: 4%; animation-delay: -9s; }
+.mining-coal-6 { --coal-size: 23px; --coal-duration: 13s; top: 68%; left: 15%; animation-delay: -5s; }
+.mining-coal-7 { --coal-size: 13px; --coal-duration: 17s; top: 79%; left: 6%; animation-delay: -12s; }
+.mining-coal-8 { --coal-size: 19px; --coal-duration: 14s; top: 89%; left: 22%; animation-delay: -2s; }
+.mining-coal-9 { --coal-size: 15px; --coal-duration: 12s; top: 10%; right: 17%; animation-delay: -6s; }
+.mining-coal-10 { --coal-size: 24px; --coal-duration: 16s; top: 19%; right: 5%; animation-delay: -11s; }
+.mining-coal-11 { --coal-size: 13px; --coal-duration: 13s; top: 31%; right: 20%; animation-delay: -3s; }
+.mining-coal-12 { --coal-size: 20px; --coal-duration: 15s; top: 42%; right: 4%; animation-delay: -8s; }
+.mining-coal-13 { --coal-size: 14px; --coal-duration: 11s; top: 52%; right: 15%; animation-delay: -13s; }
+.mining-coal-14 { --coal-size: 25px; --coal-duration: 17s; top: 64%; right: 5%; animation-delay: -4s; }
+.mining-coal-15 { --coal-size: 15px; --coal-duration: 14s; top: 76%; right: 21%; animation-delay: -9s; }
+.mining-coal-16 { --coal-size: 21px; --coal-duration: 12s; top: 88%; right: 8%; animation-delay: -1s; }
+.mining-coal-17 { --coal-size: 10px; --coal-duration: 10s; top: 37%; left: 12%; animation-delay: -6s; }
+.mining-coal-18 { --coal-size: 11px; --coal-duration: 15s; top: 60%; left: 24%; animation-delay: -11s; }
+.mining-coal-19 { --coal-size: 12px; --coal-duration: 13s; top: 26%; right: 12%; animation-delay: -2s; }
+.mining-coal-20 { --coal-size: 10px; --coal-duration: 16s; top: 72%; right: 13%; animation-delay: -7s; }
+
+.mining-ember {
+  position: absolute;
+  display: block;
+  width: var(--ember-size, 8px);
+  height: calc(var(--ember-size, 8px) * 1.8);
+  border-radius: 65% 35% 60% 40%;
+  background: linear-gradient(0deg, rgb(185 28 28 / 12%), rgb(239 68 68 / 80%) 54%, rgb(251 191 36 / 72%));
+  filter: drop-shadow(0 0 8px rgb(239 68 68 / 62%));
+  animation: ember-rise var(--ember-duration, 8s) ease-in-out infinite;
+}
+
+.mining-ember-1 { --ember-size: 7px; --ember-duration: 8s; left: 8%; top: 74%; }
+.mining-ember-2 { --ember-size: 5px; --ember-duration: 10s; left: 17%; top: 84%; animation-delay: -4s; }
+.mining-ember-3 { --ember-size: 9px; --ember-duration: 9s; left: 25%; top: 69%; animation-delay: -6s; }
+.mining-ember-4 { --ember-size: 6px; --ember-duration: 11s; left: 34%; top: 90%; animation-delay: -2s; }
+.mining-ember-5 { --ember-size: 8px; --ember-duration: 9s; right: 7%; top: 77%; animation-delay: -5s; }
+.mining-ember-6 { --ember-size: 5px; --ember-duration: 12s; right: 18%; top: 86%; animation-delay: -8s; }
+.mining-ember-7 { --ember-size: 9px; --ember-duration: 10s; right: 29%; top: 72%; animation-delay: -3s; }
+.mining-ember-8 { --ember-size: 6px; --ember-duration: 8s; right: 37%; top: 91%; animation-delay: -7s; }
+.mining-ember-9 { --ember-size: 5px; --ember-duration: 13s; left: 12%; top: 48%; animation-delay: -10s; }
+.mining-ember-10 { --ember-size: 7px; --ember-duration: 11s; left: 30%; top: 58%; animation-delay: -5s; }
+.mining-ember-11 { --ember-size: 6px; --ember-duration: 9s; right: 11%; top: 47%; animation-delay: -1s; }
+.mining-ember-12 { --ember-size: 8px; --ember-duration: 12s; right: 31%; top: 61%; animation-delay: -9s; }
+
+.mining-side-machine {
+  position: absolute;
+  width: clamp(120px, 17vw, 255px);
+  height: auto;
+  filter: drop-shadow(0 0 18px rgb(217 155 43 / 24%));
+}
+
+.mining-side-excavator {
+  top: 24%;
+  left: -22px;
+  animation: machinery-float 8s ease-in-out infinite;
+}
+
+.mining-side-dozer {
+  top: 48%;
+  left: 3%;
+  animation: machinery-float 10s ease-in-out -3s infinite;
+}
+
+.mining-side-drill {
+  top: 19%;
+  right: 4%;
+  width: clamp(100px, 13vw, 195px);
+  animation: machinery-float 9s ease-in-out -6s infinite;
+}
+
+.mining-side-truck {
+  top: 58%;
+  right: -24px;
+  animation: machinery-float 9s ease-in-out -4s infinite;
+}
+
+.mining-machinery {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: min(55vh, 460px);
+  min-height: 230px;
+  opacity: 0.52;
+}
+
+.machine-glow {
+  animation: machine-idle 5s ease-in-out infinite;
+  transform-origin: 370px 290px;
+}
+
+.truck-glow {
+  animation-delay: -2.5s;
+  transform-origin: 1100px 290px;
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0) scale(0.99);
+  transition:
+    opacity 650ms ease,
+    transform 650ms cubic-bezier(0.2, 0.75, 0.25, 1);
+  transition-delay: var(--scroll-reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+@keyframes coal-drift {
+  0% { transform: translate3d(0, 0, 0) rotate(-12deg); }
+  100% { transform: translate3d(22px, -28px, 0) rotate(24deg); }
+}
+
+@keyframes machine-idle {
+  0%, 100% { opacity: 0.74; }
+  50% { opacity: 1; }
+}
+
+@keyframes machinery-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -15px, 0); }
+}
+
+@keyframes ember-rise {
+  0% { opacity: 0; transform: translate3d(0, 18px, 0) rotate(-12deg) scale(0.7); }
+  18% { opacity: 0.8; }
+  72% { opacity: 0.62; }
+  100% { opacity: 0; transform: translate3d(16px, -90px, 0) rotate(22deg) scale(1.15); }
+}
+
+@media (max-width: 640px) {
+  .mining-backdrop { opacity: 0.67; }
+  .mining-side-machine { width: clamp(115px, 34vw, 180px); }
+  .mining-side-excavator { top: 19%; left: -48px; }
+  .mining-side-dozer { top: 45%; left: -74px; width: 150px; }
+  .mining-side-drill { top: 17%; right: -57px; width: 130px; }
+  .mining-side-truck { top: 62%; right: -53px; }
+  .mining-coal-2, .mining-coal-4, .mining-coal-8,
+  .mining-coal-11, .mining-coal-15, .mining-coal-18 { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mining-coal,
+  .mining-ember,
+  .machine-glow,
+  .mining-side-machine {
+    animation: none;
+  }
+
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Subtle custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d97706;
+}

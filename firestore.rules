@@ -1,0 +1,132 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    function isValidCommunitySubmission(data) {
+      return data.keys().hasAll([
+          'nameMode',
+          'name',
+          'pollOptionId',
+          'pollOption',
+          'rating',
+          'criticism',
+          'createdAt'
+        ])
+        && data.keys().hasOnly([
+          'nameMode',
+          'name',
+          'pollOptionId',
+          'pollOption',
+          'rating',
+          'criticism',
+          'createdAt'
+        ])
+        && data.nameMode in ['anonymous', 'named']
+        && data.name is string
+        && data.name.size() <= 80
+        && (data.nameMode == 'anonymous' ? data.name == 'Anonim' : data.name.size() > 0)
+        && data.pollOptionId is string
+        && data.pollOptionId.matches('^(1|2|3|4|custom-[A-Za-z0-9-]{1,80})$')
+        && data.pollOption is string
+        && data.pollOption.size() > 0
+        && data.pollOption.size() <= 160
+        && data.rating is int
+        && data.rating >= 1
+        && data.rating <= 5
+        && data.criticism is string
+        && data.criticism.size() > 0
+        && data.criticism.size() <= 2000
+        && data.createdAt == request.time;
+    }
+
+    function isValidMemberRegistration(data) {
+      return data.keys().hasAll([
+          'fullName',
+          'nim',
+          'email',
+          'phone',
+          'university',
+          'major',
+          'className',
+          'division',
+          'secondaryDivision',
+          'motivation',
+          'regCode',
+          'createdAt'
+        ])
+        && data.keys().hasOnly([
+          'fullName',
+          'nim',
+          'email',
+          'phone',
+          'university',
+          'major',
+          'className',
+          'division',
+          'secondaryDivision',
+          'motivation',
+          'regCode',
+          'registeredAt',
+          'createdAt'
+        ])
+        && data.fullName is string
+        && data.fullName.size() > 0
+        && data.fullName.size() <= 120
+        && data.nim is string
+        && data.nim.size() > 0
+        && data.nim.size() <= 40
+        && data.email is string
+        && data.email.size() > 0
+        && data.email.size() <= 254
+        && data.phone is string
+        && data.phone.size() > 0
+        && data.phone.size() <= 30
+        && data.university is string
+        && data.university.size() > 0
+        && data.university.size() <= 160
+        && data.major is string
+        && data.major.size() > 0
+        && data.major.size() <= 160
+        && data.className in ['TPB 1A', 'TPB 1B', 'TPB 1C']
+        && data.division is string
+        && data.division.size() > 0
+        && data.division.size() <= 100
+        && data.secondaryDivision is string
+        && data.secondaryDivision.size() > 0
+        && data.secondaryDivision.size() <= 100
+        && data.motivation is string
+        && data.motivation.size() > 0
+        && data.motivation.size() <= 2000
+        && data.regCode is string
+        && data.regCode.matches('^MTR-REG-[0-9]{6}$')
+        && (!data.keys().hasAny(['registeredAt'])
+          || (data.registeredAt is string && data.registeredAt.size() <= 40))
+        && data.createdAt == request.time;
+    }
+
+    match /siteContent/{documentId} {
+      allow read: if documentId == 'public';
+      allow create, update, delete: if documentId == 'public' && isAdmin();
+    }
+
+    match /communitySubmissions/{submissionId} {
+      allow read, delete: if isAdmin();
+      allow create: if isValidCommunitySubmission(request.resource.data);
+      allow update: if false;
+    }
+
+    match /communityRateLimits/{limitId} {
+      allow read, write: if false;
+    }
+
+    match /memberRegistrations/{registrationId} {
+      allow read: if isAdmin();
+      allow create: if isValidMemberRegistration(request.resource.data);
+      allow update: if false;
+      allow delete: if isAdmin();
+    }
+  }
+}
